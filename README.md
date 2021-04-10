@@ -1,4 +1,4 @@
 # pish
-Python Interactive SHell
+Python Interactive SHell. Zero dependencies. Just Python.
 ## Compatibility
 Only runs on GNU/Linux.
