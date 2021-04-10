@@ -1,3 +1,3 @@
 # pish
 
-Python Interactive Shell
+Python Interactive SHell
