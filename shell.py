@@ -12,34 +12,36 @@ except FileNotFoundError:
     print("See README: https://github.com/onyxcode/pish#instructions")
     lin_home = " "
 else:
-    lin_home = settings['HOMEDIR']
-
-
+    lin_home = settings["HOMEDIR"]
 
 
 class Color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
+    PURPLE = "\033[95m"
+    CYAN = "\033[96m"
+    DARKCYAN = "\033[36m"
+    BLUE = "\033[94m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    RED = "\033[91m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
+    END = "\033[0m"
+
 
 while True:
     try:
-        stdin = input(f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n➜ ")
+        stdin = input(
+            f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n➜ "
+        )
         if stdin == "exit":
             print("")
             exit()
         if stdin == "clear":
             print("")
-            os.system('clear')
+            os.system("clear")
         if stdin == "help":
-            print(f"""{Color.BOLD}Commands:{Color.END}
+            print(
+                f"""{Color.BOLD}Commands:{Color.END}
     cd          Move to existing directory located elsewhere.
     clear       Clears screen.
     exit        Exits shell.
@@ -47,7 +49,8 @@ while True:
     ls          List all files and subdirectories in current directory.
     mkd         Creates new directory.
     rm          Removes file.
-    rmd         Removes directory.""")
+    rmd         Removes directory."""
+            )
         if stdin.startswith("mkd"):
             newdir = stdin.split(" ")[1]
             if os.path.exists(newdir):
@@ -78,7 +81,7 @@ while True:
                     print("Home directory is not set.")
                     continue
                 else:
-                    targdir = settings['HOMEDIR']
+                    targdir = settings["HOMEDIR"]
             else:
                 targdir = stdin.split(" ")[1]
             if os.path.exists(targdir):
@@ -100,7 +103,6 @@ while True:
                 elif os.path.isfile(item):
                     item = f"{Color.GREEN}{item}{Color.END}"
                 print(item)
-
 
     except EOFError:
         print("")
