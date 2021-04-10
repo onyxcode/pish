@@ -2,6 +2,7 @@ import os
 import pathlib
 import shutil
 import json
+import glob
 
 try:
     with open(f"{os.path.abspath(os.getcwd())}/settings.json") as settings:
@@ -30,16 +31,20 @@ class Color:
 
 while True:
     try:
-        stdin = input(f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n(> ")
+        stdin = input(f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n➜ ")
         if stdin == "exit":
+            print("")
             exit()
         if stdin == "clear":
+            print("")
             os.system('clear')
         if stdin == "help":
             print(f"""{Color.BOLD}Commands:{Color.END}
+    cd          Move to existing directory located elsewhere.
     clear       Clears screen.
     exit        Exits shell.
     help        Shows this message.
+    ls          List all files and subdirectories in current directory.
     mkd         Creates new directory.
     rm          Removes file.
     rmd         Removes directory.""")
@@ -67,6 +72,35 @@ while True:
                     shutil.rmtree(targdir)
             else:
                 print("Directory does not exist.")
+        if stdin.startswith("cd "):
+            if stdin.split(" ")[1] == "~":
+                if lin_home == " ":
+                    print("Home directory is not set.")
+                    continue
+                else:
+                    targdir = settings['HOMEDIR']
+            else:
+                targdir = stdin.split(" ")[1]
+            if os.path.exists(targdir):
+                if os.path.isfile(targdir):
+                    print("This is a file, please select a directory.")
+                else:
+                    os.chdir(targdir)
+        if stdin.startswith("ls"):
+            try:
+                stdin.split(" ")[1]
+            except IndexError:
+                lst = f"{os.path.abspath(os.getcwd())}"
+                dr = os.path.abspath(os.getcwd())
+            else:
+                lst = stdin.split(" ")[1]
+            for item in os.listdir(lst):
+                if os.path.isdir(item):
+                    item = f"{Color.RED}{item}{Color.END}"
+                elif os.path.isfile(item):
+                    item = f"{Color.GREEN}{item}{Color.END}"
+                print(item)
+
 
     except EOFError:
         print("")
