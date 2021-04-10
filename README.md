@@ -1,0 +1,2 @@
+# pish
+Python Interactive SHell
