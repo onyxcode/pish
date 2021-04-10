@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PISH extensions folder
+Ext/
+
+# PISH settings file
+settings.json
