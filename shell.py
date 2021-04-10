@@ -2,8 +2,19 @@ import os
 import Ext
 import pathlib
 import shutil
+import json
 
-lin_home = "/home/daniel"
+try:
+    with open(f"{os.path.abspath(os.getcwd())}/settings.json") as settings:
+        settings = json.load(settings)
+except FileNotFoundError:
+    print("Settings file (settings.json) does not exist.")
+    print("See README: https://github.com/onyxcode/pish#instructions")
+    lin_home = " "
+else:
+    lin_home = settings['HOMEDIR']
+
+
 
 
 class Color:
