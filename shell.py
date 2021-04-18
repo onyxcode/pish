@@ -52,7 +52,8 @@ while True:
     ls          List all files and subdirectories in current directory.
     mkd         Creates new directory.
     rm          Removes file.
-    rmd         Removes directory."""
+    rmd         Removes directory.
+    wd          Shows current working directory."""
             )
         if stdin.startswith("mkd"):
             newdir = stdin.split(" ")[1]
@@ -106,6 +107,11 @@ while True:
                 elif os.path.isfile(item):
                     item = f"{Color.GREEN}{item}{Color.END}"
                 print(item)
+        if stdin == "wd":
+            print(pathlib.Path(__file__).parent.absolute())
+        if stdin  == "..":
+            os.chdir("..")
+
 
     except EOFError:
         print("")
