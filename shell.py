@@ -3,6 +3,8 @@ import pathlib
 import shutil
 import json
 import glob
+import readline
+from sys import exit
 
 try:
     with open(f"{os.path.abspath(os.getcwd())}/settings.json") as settings:
@@ -33,6 +35,7 @@ while True:
         stdin = input(
             f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n➜ "
         )
+        readline.write_history_file(f"{os.path.abspath(os.getcwd())}/.pish_history")
         if stdin == "exit":
             print("")
             exit()

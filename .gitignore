@@ -133,3 +133,6 @@ Ext/
 
 # PISH settings file
 settings.json
+
+# PISH history file
+.pish_history
