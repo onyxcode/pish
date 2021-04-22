@@ -6,16 +6,6 @@ import glob
 import readline
 from sys import exit
 
-try:
-    with open(f"{os.path.abspath(os.getcwd())}/settings.json") as settings:
-        settings = json.load(settings)
-except FileNotFoundError:
-    print("Settings file (settings.json) does not exist.")
-    print("See README: https://github.com/onyxcode/pish#instructions")
-    lin_home = " "
-else:
-    lin_home = settings["HOMEDIR"]
-
 
 class Color:
     PURPLE = "\033[95m"
@@ -33,7 +23,7 @@ class Color:
 while True:
     try:
         stdin = input(
-            f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(lin_home, '~')}{Color.END}\n➜ "
+            f"{Color.BOLD}{os.path.abspath(os.getcwd()).replace(str(pathlib.Path.home()), '~')}{Color.END}\n➜ "
         )
         readline.write_history_file(f"{os.path.abspath(os.getcwd())}/.pish_history")
         if stdin == "exit":
